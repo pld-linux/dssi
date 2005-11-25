@@ -1,7 +1,7 @@
 Summary:	Disposable Soft Synth Interface specification
 Name:		dssi
 Version:	0.9.1
-Release:	0.1
+Release:	1
 License:	LGPL v2.1
 Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/dssi/%{name}-%{version}.tar.gz
@@ -10,8 +10,8 @@ URL:		http://dssi.sourceforge.net/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel
-# lib{lo,sndfile,samplerate} are req. to build examples
-#BuildRequires:	liblo-devel
+BuildRequires:	liblo-devel
+# lib{sndfile,samplerate} are req. to build examples
 #BuildRequires:	libsndfile-devel
 #BuildRequires:	libsamplerate-devel
 Requires:	alsa-lib-devel
@@ -36,11 +36,6 @@ defines the C API.
 %setup -q
 
 %build
-#%{__libtoolize}
-#%{__aclocal}
-#%{__autoconf}
-#%{__autoheader}
-#%{__automake}
 %configure
 %{__make}
 

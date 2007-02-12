@@ -1,5 +1,5 @@
 Summary:	Disposable Soft Synth Interface specification
-Summary(pl):	Specyfikacja Disposable Soft Synth Interface
+Summary(pl.UTF-8):   Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
 Version:	0.9.1
 Release:	2
@@ -33,31 +33,31 @@ an RFC which describes the background for the proposal and defines the
 OSC part of the specification, and a documented header file which
 defines the C API.
 
-%description -l pl
-DSSI (wymawiane "dizzy") to API dla wtyczek d¼wiêkowych z
-zastosowaniem szczególnie dla wtyczek syntezy programowej z natywnymi
-interfejsami u¿ytkownika. DSSI to otwarta specyfikacja stworzona do
-u¿ywania w linuksowych aplikacjach d¼wiêkowych, ale przeno¶na na inne
-platformy. Mo¿na j± okre¶liæ jako LADSPA dla instrumentów lub co¶
-porównywalnego do VSTi.
+%description -l pl.UTF-8
+DSSI (wymawiane "dizzy") to API dla wtyczek dÅºwiÄ™kowych z
+zastosowaniem szczegÃ³lnie dla wtyczek syntezy programowej z natywnymi
+interfejsami uÅ¼ytkownika. DSSI to otwarta specyfikacja stworzona do
+uÅ¼ywania w linuksowych aplikacjach dÅºwiÄ™kowych, ale przenoÅ›na na inne
+platformy. MoÅ¼na jÄ… okreÅ›liÄ‡ jako LADSPA dla instrumentÃ³w lub coÅ›
+porÃ³wnywalnego do VSTi.
 
-DSSI sk³ada siê z API jêzyka C do u¿ytku przez wtyczki i hosty, oparte
-o API LADSPA oraz API OSC (Open Sound Control) do u¿ytku w
-interfejsach u¿ytkownika do komunikacji z hostem. Specyfikacja DSSI
-sk³ada siê z RFC opisuj±cego t³o propozycji i definiuj±cego czê¶æ OSC
-specyfikacji oraz udokumentowanego pliku nag³ówkowego definiuj±cego
+DSSI skÅ‚ada siÄ™ z API jÄ™zyka C do uÅ¼ytku przez wtyczki i hosty, oparte
+o API LADSPA oraz API OSC (Open Sound Control) do uÅ¼ytku w
+interfejsach uÅ¼ytkownika do komunikacji z hostem. Specyfikacja DSSI
+skÅ‚ada siÄ™ z RFC opisujÄ…cego tÅ‚o propozycji i definiujÄ…cego czÄ™Å›Ä‡ OSC
+specyfikacji oraz udokumentowanego pliku nagÅ‚Ã³wkowego definiujÄ…cego
 API C.
 
 %package host-jack
 Summary:	A simple JACK/ALSA-sequencer plugin host
-Summary(pl):	Prosty host wtyczek sekwencera JACK/ALSA
+Summary(pl.UTF-8):   Prosty host wtyczek sekwencera JACK/ALSA
 Group:		Applications/Sound
 Requires:	liblo >= 0.12
 
 %description host-jack
 A simple JACK/ALSA-sequencer plugin host.
 
-%description host-jack -l pl
+%description host-jack -l pl.UTF-8
 Prosty host wtyczek sekwencera JACK/ALSA.
 
 %prep

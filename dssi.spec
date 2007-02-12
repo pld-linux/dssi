@@ -1,5 +1,5 @@
 Summary:	Disposable Soft Synth Interface specification
-Summary(pl.UTF-8):   Specyfikacja Disposable Soft Synth Interface
+Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
 Version:	0.9.1
 Release:	2
@@ -50,7 +50,7 @@ API C.
 
 %package host-jack
 Summary:	A simple JACK/ALSA-sequencer plugin host
-Summary(pl.UTF-8):   Prosty host wtyczek sekwencera JACK/ALSA
+Summary(pl.UTF-8):	Prosty host wtyczek sekwencera JACK/ALSA
 Group:		Applications/Sound
 Requires:	liblo >= 0.12
 

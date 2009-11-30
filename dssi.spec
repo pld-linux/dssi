@@ -13,11 +13,14 @@ BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel >= 1.0
 BuildRequires:	liblo-devel >= 0.12
 # lib{sndfile,samplerate} are req. to build examples
-#BuildRequires:	libsndfile-devel
 #BuildRequires:	libsamplerate-devel
+#BuildRequires:	libsndfile-devel
+BuildRequires:	pkgconfig
 Requires:	alsa-lib-devel >= 0.9
 Requires:	ladspa-devel >= 1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%undefine	__cxx
 
 %description
 DSSI (pronounced "dizzy") is an API for audio plugins, with particular

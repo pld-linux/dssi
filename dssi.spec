@@ -1,23 +1,22 @@
 Summary:	Disposable Soft Synth Interface specification
 Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
-Version:	0.9.1
-Release:	2
+Version:	1.0.0
+Release:	1
 License:	LGPL v2.1
 Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/dssi/%{name}-%{version}.tar.gz
-# Source0-md5:	1a353c3ae80328cded838853ddf52164
+# Source0-md5:	bc4c50f9f9b3cd13019718266f8f15af
 URL:		http://dssi.sourceforge.net/
+BuildRequires:	QtGui-devel
 BuildRequires:	alsa-lib-devel >= 0.9
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel >= 1.0
 BuildRequires:	liblo-devel >= 0.12
-# lib{sndfile,samplerate} are req. to build examples
-#BuildRequires:	libsamplerate-devel
-#BuildRequires:	libsndfile-devel
+BuildRequires:	libsamplerate-devel
+BuildRequires:	libsndfile-devel
+BuildRequires:	libsndfile-devel
 BuildRequires:	pkgconfig
-Requires:	alsa-lib-devel >= 0.9
-Requires:	ladspa-devel >= 1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx
@@ -51,10 +50,26 @@ składa się z RFC opisującego tło propozycji i definiującego część OSC
 specyfikacji oraz udokumentowanego pliku nagłówkowego definiującego
 API C.
 
+%package devel
+Summary:	DSSI development files
+Summary(pl.UTF-8):	Pliki nagłówkowe DSSI
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	alsa-lib-devel >= 0.9
+Requires:	ladspa-devel >= 1.0
+Obsoletes:	dssi < 1.0.0
+
+%description devel
+DSSI development files.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe DSSI.
+
 %package host-jack
 Summary:	A simple JACK/ALSA-sequencer plugin host
 Summary(pl.UTF-8):	Prosty host wtyczek sekwencera JACK/ALSA
 Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
 Requires:	liblo >= 0.12
 
 %description host-jack
@@ -63,10 +78,25 @@ A simple JACK/ALSA-sequencer plugin host.
 %description host-jack -l pl.UTF-8
 Prosty host wtyczek sekwencera JACK/ALSA.
 
+%package examples
+Summary:	Example DSSI plugins
+Summary(pl.UTF-8):	Przykładowe wtyczki DSSI
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+
+%description examples
+Example DSSI plugins.
+
+%description examples -l pl.UTF-8
+Przykładowe wtyczki DSSI
+
 %prep
 %setup -q
 
 %build
+CFLAGS="$CFLAGS -I%{_includedir}/qt"
+CPPFLAGS="$CPPFLAGS -I%{_includedir}/qt"
+export QTDIR=%{_prefix}
 %configure
 %{__make}
 
@@ -76,15 +106,37 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/dssi/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README doc/TODO doc/*.txt
+%attr(755,root,root) %{_bindir}/dssi_osc_send
+%attr(755,root,root) %{_bindir}/dssi_osc_update
+%dir %{_libdir}/dssi
+%{_mandir}/man1/dssi*
+
+%files devel
+%defattr(644,root,root,755)
 %{_includedir}/dssi.h
 %{_pkgconfigdir}/dssi.pc
 
 %files host-jack
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/jack-dssi-host
+%{_mandir}/man1/jack-dssi-host.*
+
+%files examples
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/karplong
+%attr(755,root,root) %{_bindir}/less_trivial_synth
+%attr(755,root,root) %{_bindir}/trivial_sampler
+%attr(755,root,root) %{_bindir}/trivial_synth
+%attr(755,root,root) %{_libdir}/dssi/*.so
+%dir %{_libdir}/dssi/less_trivial_synth
+%attr(755,root,root) %{_libdir}/dssi/less_trivial_synth/*_qt
+%dir %{_libdir}/dssi/trivial_sampler
+%attr(755,root,root) %{_libdir}/dssi/trivial_sampler/*_qt

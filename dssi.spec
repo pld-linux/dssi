@@ -7,6 +7,7 @@ License:	LGPL v2.1
 Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/dssi/%{name}-%{version}.tar.gz
 # Source0-md5:	bc4c50f9f9b3cd13019718266f8f15af
+Patch0:		%{name}-qt_test.patch
 URL:		http://dssi.sourceforge.net/
 BuildRequires:	qt-devel >= 3.3
 BuildRequires:	alsa-lib-devel >= 0.9
@@ -92,8 +93,15 @@ Przykładowe wtyczki DSSI
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+
 CFLAGS="$CFLAGS -I%{_includedir}/qt"
 CPPFLAGS="$CPPFLAGS -I%{_includedir}/qt"
 export QTDIR=%{_prefix}

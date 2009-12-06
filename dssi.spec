@@ -9,15 +9,18 @@ Source0:	http://dl.sourceforge.net/dssi/%{name}-%{version}.tar.gz
 # Source0-md5:	bc4c50f9f9b3cd13019718266f8f15af
 Patch0:		%{name}-qt_test.patch
 URL:		http://dssi.sourceforge.net/
-BuildRequires:	qt-devel >= 3.3
 BuildRequires:	alsa-lib-devel >= 0.9
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel >= 1.0
 BuildRequires:	liblo-devel >= 0.12
 BuildRequires:	libsamplerate-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libsndfile-devel
+BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	qt-devel >= 3.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx

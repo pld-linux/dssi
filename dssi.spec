@@ -8,7 +8,7 @@ Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/dssi/%{name}-%{version}.tar.gz
 # Source0-md5:	bc4c50f9f9b3cd13019718266f8f15af
 URL:		http://dssi.sourceforge.net/
-BuildRequires:	QtGui-devel
+BuildRequires:	qt-devel >= 3.3
 BuildRequires:	alsa-lib-devel >= 0.9
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel >= 1.0

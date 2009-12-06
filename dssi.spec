@@ -23,8 +23,6 @@ BuildRequires:	pkgconfig
 BuildRequires:	qt-devel >= 3.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%undefine	__cxx
-
 %description
 DSSI (pronounced "dizzy") is an API for audio plugins, with particular
 application for software synthesis plugins with native user

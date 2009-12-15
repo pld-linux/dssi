@@ -2,12 +2,13 @@ Summary:	Disposable Soft Synth Interface specification
 Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
 Version:	1.0.0
-Release:	1
+Release:	2
 License:	LGPL v2.1
 Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/dssi/%{name}-%{version}.tar.gz
 # Source0-md5:	bc4c50f9f9b3cd13019718266f8f15af
 Patch0:		%{name}-qt_test.patch
+Patch1:		%{name}-lib64.patch
 URL:		http://dssi.sourceforge.net/
 BuildRequires:	alsa-lib-devel >= 0.9
 BuildRequires:	autoconf
@@ -95,6 +96,9 @@ Przykładowe wtyczki DSSI
 %prep
 %setup -q
 %patch0 -p1
+%if "%{_lib}" == "lib64"
+%patch1 -p1
+%endif
 
 %build
 %{__libtoolize}

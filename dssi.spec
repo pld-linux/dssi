@@ -1,15 +1,15 @@
 Summary:	Disposable Soft Synth Interface specification
 Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
-Version:	1.0.0
-Release:	3
+Version:	1.1.0
+Release:	1
 License:	LGPL v2.1
 Group:		Development/Libraries
-Source0:	http://dl.sourceforge.net/dssi/%{name}-%{version}.tar.gz
-# Source0-md5:	bc4c50f9f9b3cd13019718266f8f15af
-Patch0:		%{name}-qt_test.patch
-Patch1:		%{name}-lib64.patch
+Source0:	http://downloads.sourceforge.net/dssi/%{name}-%{version}.tar.gz
+# Source0-md5:	dfc850e66fae94e7ec08aebb43d07848
+Patch0:		%{name}-lib64.patch
 URL:		http://dssi.sourceforge.net/
+BuildRequires:	QtGui-devel >= 4.0.1
 BuildRequires:	alsa-lib-devel >= 0.9
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -18,10 +18,9 @@ BuildRequires:	ladspa-devel >= 1.0
 BuildRequires:	liblo-devel >= 0.12
 BuildRequires:	libsamplerate-devel
 BuildRequires:	libsndfile-devel
-BuildRequires:	libsndfile-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	qt-devel >= 3.3
+BuildRequires:	qt4-build >= 4.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -95,9 +94,8 @@ Przykładowe wtyczki DSSI
 
 %prep
 %setup -q
-%patch0 -p1
 %if "%{_lib}" == "lib64"
-%patch1 -p1
+%patch0 -p1
 %endif
 
 %build
@@ -107,9 +105,6 @@ Przykładowe wtyczki DSSI
 %{__autoheader}
 %{__automake}
 
-CFLAGS="$CFLAGS -I%{_includedir}/qt"
-CPPFLAGS="$CPPFLAGS -I%{_includedir}/qt"
-export QTDIR=%{_prefix}
 %configure
 %{__make}
 
@@ -119,7 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/dssi/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/dssi/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -127,10 +122,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README doc/TODO doc/*.txt
+%attr(755,root,root) %{_bindir}/dssi_analyse_plugin
+%attr(755,root,root) %{_bindir}/dssi_list_plugins
 %attr(755,root,root) %{_bindir}/dssi_osc_send
 %attr(755,root,root) %{_bindir}/dssi_osc_update
 %dir %{_libdir}/dssi
-%{_mandir}/man1/dssi*
+%{_mandir}/man1/dssi*.1*
 
 %files devel
 %defattr(644,root,root,755)
@@ -140,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %files host-jack
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/jack-dssi-host
-%{_mandir}/man1/jack-dssi-host.*
+%{_mandir}/man1/jack-dssi-host.1*
 
 %files examples
 %defattr(644,root,root,755)

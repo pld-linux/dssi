@@ -1,19 +1,20 @@
 Summary:	Disposable Soft Synth Interface specification
 Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
-Version:	1.1.0
+Version:	1.1.1
 Release:	1
 License:	LGPL v2.1
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/dssi/%{name}-%{version}.tar.gz
-# Source0-md5:	dfc850e66fae94e7ec08aebb43d07848
+# Source0-md5:	619ab73c883b02dc37ddb37001591f8b
 Patch0:		%{name}-lib64.patch
 URL:		http://dssi.sourceforge.net/
+BuildRequires:	QtCore-devel >= 4.0.1
 BuildRequires:	QtGui-devel >= 4.0.1
 BuildRequires:	alsa-lib-devel >= 0.9
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	jack-audio-connection-kit-devel
+BuildRequires:	jack-audio-connection-kit-devel >= 0.99.14
 BuildRequires:	ladspa-devel >= 1.0
 BuildRequires:	liblo-devel >= 0.12
 BuildRequires:	libsamplerate-devel
@@ -21,6 +22,7 @@ BuildRequires:	libsndfile-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	qt4-build >= 4.0.1
+BuildRequires:	xorg-lib-libX11-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

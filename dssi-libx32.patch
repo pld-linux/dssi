@@ -1,0 +1,29 @@
+diff -durN dssi-1.0.0.orig/doc/jack-dssi-host.1 dssi-1.0.0/doc/jack-dssi-host.1
+--- dssi-1.0.0.orig/doc/jack-dssi-host.1	2009-01-05 21:43:48.000000000 +0100
++++ dssi-1.0.0/doc/jack-dssi-host.1	2009-12-15 09:52:42.000000000 +0100
+@@ -91,8 +91,8 @@
+ .B DSSI_PATH,
+ which is a colon-separated list of directories. If
+ .B DSSI_PATH
+-is not set, a default search path of /usr/lib/dssi,
+-/usr/local/lib/dssi, and (assuming the environment variable HOME is
++is not set, a default search path of /usr/libx32/dssi,
++/usr/local/libx32/dssi, and (assuming the environment variable HOME is
+ set,) $HOME/.dssi is used.
+ .br
+ .SH AUTHOR
+diff -durN dssi-1.0.0.orig/jack-dssi-host/jack-dssi-host.c dssi-1.0.0/jack-dssi-host/jack-dssi-host.c
+--- dssi-1.0.0.orig/jack-dssi-host/jack-dssi-host.c	2009-01-04 22:48:26.000000000 +0100
++++ dssi-1.0.0/jack-dssi-host/jack-dssi-host.c	2009-12-15 09:53:01.000000000 +0100
+@@ -493,9 +493,9 @@
+ 	    const char *home = getenv("HOME");
+ 	    if (home) {
+ 		defaultDssiPath = malloc(strlen(home) + 60);
+-		sprintf(defaultDssiPath, "/usr/local/lib/dssi:/usr/lib/dssi:%s/.dssi", home);
++		sprintf(defaultDssiPath, "/usr/local/libx32/dssi:/usr/libx32/dssi:%s/.dssi", home);
+ 	    } else {
+-		defaultDssiPath = strdup("/usr/local/lib/dssi:/usr/lib/dssi");
++		defaultDssiPath = strdup("/usr/local/libx32/dssi:/usr/libx32/dssi");
+ 	    }
+ 	}
+ 	dssiPath = defaultDssiPath;

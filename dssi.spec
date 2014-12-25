@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	gui		# don't build gui examples (require qt4)
+#
 Summary:	Disposable Soft Synth Interface specification
 Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
@@ -8,9 +12,13 @@ Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/dssi/%{name}-%{version}.tar.gz
 # Source0-md5:	619ab73c883b02dc37ddb37001591f8b
 Patch0:		%{name}-lib64.patch
+Patch1:		%{name}-libx32.patch
 URL:		http://dssi.sourceforge.net/
+%if %{with gui}
 BuildRequires:	QtCore-devel >= 4.0.1
 BuildRequires:	QtGui-devel >= 4.0.1
+BuildRequires:	qt4-build >= 4.0.1
+%endif
 BuildRequires:	alsa-lib-devel >= 0.9
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -21,7 +29,6 @@ BuildRequires:	libsamplerate-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	qt4-build >= 4.0.1
 BuildRequires:	xorg-lib-libX11-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -99,6 +106,9 @@ Przykładowe wtyczki DSSI
 %if "%{_lib}" == "lib64"
 %patch0 -p1
 %endif
+%if "%{_lib}" == "libx32"
+%patch1 -p1
+%endif
 
 %build
 %{__libtoolize}
@@ -148,7 +158,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/trivial_sampler
 %attr(755,root,root) %{_bindir}/trivial_synth
 %attr(755,root,root) %{_libdir}/dssi/*.so
+%if %{with gui}
 %dir %{_libdir}/dssi/less_trivial_synth
 %attr(755,root,root) %{_libdir}/dssi/less_trivial_synth/*_qt
 %dir %{_libdir}/dssi/trivial_sampler
 %attr(755,root,root) %{_libdir}/dssi/trivial_sampler/*_qt
+%endif

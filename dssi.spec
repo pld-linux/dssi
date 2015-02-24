@@ -6,7 +6,7 @@ Summary:	Disposable Soft Synth Interface specification
 Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
 Version:	1.1.1
-Release:	1
+Release:	2
 License:	LGPL v2.1
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/dssi/%{name}-%{version}.tar.gz

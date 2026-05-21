@@ -6,13 +6,14 @@ Summary:	Disposable Soft Synth Interface specification
 Summary(pl.UTF-8):	Specyfikacja Disposable Soft Synth Interface
 Name:		dssi
 Version:	1.1.1
-Release:	3
+Release:	4
 License:	LGPL v2.1
 Group:		Development/Libraries
 Source0:	http://downloads.sourceforge.net/dssi/%{name}-%{version}.tar.gz
 # Source0-md5:	619ab73c883b02dc37ddb37001591f8b
 Patch0:		%{name}-lib64.patch
 Patch1:		%{name}-libx32.patch
+Patch2:		%{name}-liblo.patch
 URL:		http://dssi.sourceforge.net/
 %if %{with gui}
 BuildRequires:	QtCore-devel >= 4.0.1
@@ -109,6 +110,7 @@ Przykładowe wtyczki DSSI
 %if "%{_lib}" == "libx32"
 %patch -P1 -p1
 %endif
+%patch -P2 -p1
 
 %build
 %{__libtoolize}

@@ -1,0 +1,168 @@
+--- dssi-1.1.1.orig/jack-dssi-host/jack-dssi-host.c	2011-05-24 06:21:17.000000000 +0200
++++ dssi-1.1.1/jack-dssi-host/jack-dssi-host.c	2026-05-21 01:21:02.090994327 +0200
+@@ -119,9 +119,9 @@
+ void osc_error(int num, const char *m, const char *path);
+ 
+ int osc_message_handler(const char *path, const char *types, lo_arg **argv, int
+-		      argc, void *data, void *user_data) ;
++		      argc, lo_message data, void *user_data) ;
+ int osc_debug_handler(const char *path, const char *types, lo_arg **argv, int
+-		      argc, void *data, void *user_data) ;
++		      argc, lo_message data, void *user_data) ;
+ 
+ void
+ signalHandler(int sig)
+@@ -1903,7 +1903,7 @@
+ }
+ 
+ int osc_debug_handler(const char *path, const char *types, lo_arg **argv,
+-                      int argc, void *data, void *user_data)
++                      int argc, lo_message data, void *user_data)
+ {
+     int i;
+ 
+@@ -1919,7 +1919,7 @@
+ }
+ 
+ int osc_message_handler(const char *path, const char *types, lo_arg **argv,
+-                        int argc, void *data, void *user_data)
++                        int argc, lo_message data, void *user_data)
+ {
+     int i;
+     d3h_instance_t *instance = NULL;
+--- dssi-1.1.1.orig/examples/less_trivial_synth_qt_gui.cpp	2026-05-21 01:21:25.269552353 +0200
++++ dssi-1.1.1/examples/less_trivial_synth_qt_gui.cpp	2026-05-21 01:21:33.874238378 +0200
+@@ -305,7 +305,7 @@
+ 
+ int
+ debug_handler(const char *path, const char *types, lo_arg **argv,
+-	      int argc, void *data, void *user_data)
++	      int argc, lo_message data, void *user_data)
+ {
+     int i;
+ 
+@@ -323,7 +323,7 @@
+ 
+ int
+ program_handler(const char *path, const char *types, lo_arg **argv,
+-	       int argc, void *data, void *user_data)
++	       int argc, lo_message data, void *user_data)
+ {
+     cerr << "Program handler not yet implemented" << endl;
+     return 0;
+@@ -331,21 +331,21 @@
+ 
+ int
+ configure_handler(const char *path, const char *types, lo_arg **argv,
+-		  int argc, void *data, void *user_data)
++		  int argc, lo_message data, void *user_data)
+ {
+     return 0;
+ }
+ 
+ int
+ rate_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     return 0; /* ignore it */
+ }
+ 
+ int
+ show_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     SynthGUI *gui = static_cast<SynthGUI *>(user_data);
+     while (!gui->ready()) sleep(1);
+@@ -356,7 +356,7 @@
+ 
+ int
+ hide_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     SynthGUI *gui = static_cast<SynthGUI *>(user_data);
+     gui->hide();
+@@ -365,7 +365,7 @@
+ 
+ int
+ quit_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     SynthGUI *gui = static_cast<SynthGUI *>(user_data);
+     gui->setHostRequestedQuit(true);
+@@ -375,7 +375,7 @@
+ 
+ int
+ control_handler(const char *path, const char *types, lo_arg **argv,
+-		int argc, void *data, void *user_data)
++		int argc, lo_message data, void *user_data)
+ {
+     SynthGUI *gui = static_cast<SynthGUI *>(user_data);
+ 
+--- dssi-1.1.1.orig/examples/trivial_sampler_qt_gui.cpp	2026-05-21 01:21:25.272885686 +0200
++++ dssi-1.1.1/examples/trivial_sampler_qt_gui.cpp	2026-05-21 01:21:33.957705937 +0200
+@@ -483,7 +483,7 @@
+ 
+ int
+ debug_handler(const char *path, const char *types, lo_arg **argv,
+-	      int argc, void *data, void *user_data)
++	      int argc, lo_message data, void *user_data)
+ {
+     int i;
+ 
+@@ -501,7 +501,7 @@
+ 
+ int
+ configure_handler(const char *path, const char *types, lo_arg **argv,
+-		  int argc, void *data, void *user_data)
++		  int argc, lo_message data, void *user_data)
+ {
+     SamplerGUI *gui = static_cast<SamplerGUI *>(user_data);
+     const char *key = (const char *)&argv[0]->s;
+@@ -518,14 +518,14 @@
+ 
+ int
+ rate_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     return 0;
+ }
+ 
+ int
+ show_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     SamplerGUI *gui = static_cast<SamplerGUI *>(user_data);
+     while (!gui->ready()) sleep(1);
+@@ -543,7 +543,7 @@
+ 
+ int
+ hide_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     SamplerGUI *gui = static_cast<SamplerGUI *>(user_data);
+     gui->hide();
+@@ -552,7 +552,7 @@
+ 
+ int
+ quit_handler(const char *path, const char *types, lo_arg **argv,
+-	     int argc, void *data, void *user_data)
++	     int argc, lo_message data, void *user_data)
+ {
+     SamplerGUI *gui = static_cast<SamplerGUI *>(user_data);
+     gui->setHostRequestedQuit(true);
+@@ -562,7 +562,7 @@
+ 
+ int
+ control_handler(const char *path, const char *types, lo_arg **argv,
+-		int argc, void *data, void *user_data)
++		int argc, lo_message data, void *user_data)
+ {
+     SamplerGUI *gui = static_cast<SamplerGUI *>(user_data);
+ 
